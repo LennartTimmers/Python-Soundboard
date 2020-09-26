@@ -2,7 +2,7 @@
  
 <head>
  
-	<title>Broken Bonds Soundboard</title>
+	<title>Python Soundboard</title>
     
 	<!-- JavaScript -->
 	<script type="text/javascript">
@@ -13,95 +13,9 @@
 	<style type="text/css">
 	<!--
  
-		body { background-color: #5771b4;  margin: 0; padding: 0; font-family: sans-serif; font-size: 12px; }
+		body { background-color: #ffffff;  margin: 0; padding: 0; font-family: sans-serif; font-size: 12px; }
         a { font-size: 20px; margin-left: 10px; }
         h2 { color:#ffffff; }
-        img { border-radius: 10px;}
-        button {
-	background-color:#a4b6e5;
-	border-radius:28px;
-	border:2px solid #7d95d1;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:14px;
-	padding:8px 15px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
-    margin:2px;
-}
-button:hover {
-	background-color:#7490d8;
-}
-button:active {
-	position:relative;
-	top:1px;
-}
-
-
-.wrapper {
-  display: grid;
-  grid-template-columns: 7% 43% 7% 43%;
-  grid-gap: 0px;
-
-    border: #7490d8;
-    border-radius: 1px;
-  color: #444;
-  margin: 10px;
-}
-
-.boxb {
-    min-height: 250px;
-
-}
-.box {
-    min-height: 250px;
-
-}
-.headerWrapper{
-    
-    display: grid;
-  grid-template-columns: 80% 20%;
-  grid-gap: 0px;
-    margin: 10px;
-    margin-bottom: 40px;
-    color:#ffffff;
-}
-
-.contact {
-    font-size:14px;
-    font-family:Arial;
-    margin:14px;
-    padding-left: 5px;
-    margin-top:45px;
-}
-
-a:link {
-  color: white;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:visited {
-  color: white;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #d5e1ff;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-.pclass{
-    font-size: 35px;
-    margin-left: 5px;
-   
-}
-
-
 
 	-->
 	</style>
@@ -110,63 +24,11 @@ a:hover {
  
 <body>
 
-<div class="headerWrapper">
-    <div class="header">
-        <img src="images/Title.PNG" alt="Broken Bonds" width="250" height="125">
-    </div>
-    
-    <div class="contact">
-        <a href="about.html">About</a>
-        <a href="mailto:lennart.timmers@gmail.com">Contact</a>
-        <a href="mailto:lennart.timmers@gmail.com">Source code</a>
-    </div>
-</div>
-
-<div class="wrapper">
-  <div class="box LiLu">
-    <img src="images/Lilu.jpg" alt="LiLu" width="125" height="125">
-    <h2>Li'lu</h2>
-    
-</div>
-  <div class="boxb" id="LiLu"></div>
-
-  <div class="box Remag">
-    
-    <img src="images/Remag.png" alt="Remag" width="125" height="125">
-    <h2>Remag</h2>
-</div>
-  <div class="boxb" id="Remag"></div>
-
-  <div class="box Pmis">
-    
-    <img src="images/Dahc.png" alt="Pmis" width="125" height="125">
-    <h2>P'mis/D'ahc</h2>
-</div>
-  <div class="boxb" id="Pmis"></div>
-
-  <div class="box Ear">
-    <img src="images/Ear.jpg" alt="Ear" width="125" height="125">
-    <h2>E'ar</h2>
-</div>
-  <div class="boxb" id="Ear"></div>
-
-  <div class="box Brian">
-    
-    <img src="images/Bryan.jpg" alt="Brian" width="125" height="125">
-    <h2>Bryan</h2>
-</div>
-  <div class="boxb" id="Brian"></div>
-
-  <div class="box Hashbrown">
-    
-    <img src="images/Hashbrown.jpg" alt="Hashbrown" width="125" height="125">
-    <h2>Hashbrown</h2>
-</div>
-  <div class="box b" id="Hashbrown"></div>
-
-</div>
+<div id="Audio"></div>
 
  <script>
+ //Script automatically populates the html with all the routes, you do have to specify each route you want to include with an if statement, see line 50 and onwards.
+
     function httpGet(theUrl)
 {
     var xmlHttp = new XMLHttpRequest();
@@ -182,53 +44,26 @@ var getRoutes = httpGet("http://localhost:5000/routes");
 console.log(getRoutes);
 var allRoutes = JSON.parse(getRoutes);
 console.log(allRoutes);
+
+//Request all routes available and then start looping over them.
+
 for(var route in allRoutes){
 
     var routeValue = allRoutes[route];
 
-    if(routeValue.match(/lilu\/.*/)){
-        //skip the characterhome location of the api
-        if(routeValue != "/lilu/"){
+    //Check if the route exists
+    if(routeValue.match(/Audio\/.*/)){
+
+        //skip the home location of the route
+        if(routeValue != "/Audio/"){
             console.log(routeValue);
-            createButton("LiLu", routeValue);
-        }
-    }
-    else if(routeValue.match(/ear\/.*/)){
-        //skip the characterhome location of the api
-        if(routeValue != "/ear/"){
-            createButton("Ear", routeValue);
-        }
-    }
-    else if(routeValue.match(/remag\/.*/)){
-        //skip the characterhome location of the api
-        if(routeValue != "/remag/"){
-            createButton("Remag", routeValue);
-
-        }
-    }
-    else if(routeValue.match(/brian\/.*/)){
-        //skip the characterhome location of the api
-        if(routeValue != "/brian/"){
-            createButton("Brian", routeValue);
-
-        }
-    }
-    else if(routeValue.match(/hashbrown\/.*/)){
-        //skip the characterhome location of the api
-        if(routeValue != "/hashbrown/"){
-            createButton("Hashbrown", routeValue);
-
-        }
-    }
-    else if(routeValue.match(/pmis\/.*/)){
-        //skip the characterhome location of the api
-        if(routeValue != "/pmis/"){
-            createButton("Pmis", routeValue);
-
+            createButton("Audio", routeValue);
         }
     }
     
 }
+
+//Used to create a button for each single endpoint.
     function createButton(character, url)
 {
     var audio = document.createElement("AUDIO");

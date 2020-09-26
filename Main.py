@@ -8,10 +8,10 @@ CORS(app)
 app.debug = True
 
 
-soundboardName = "Broken Bonds"
+soundboardName = "Python"
 
 
-
+#method that retrieves all available routes that the api has
 def list_routes():
     output = []
     for rule in app.url_map.iter_rules():
@@ -40,20 +40,12 @@ def availableRoutes():
 
 
 #Load modules 
-from Remag import remagMod
-from ear import earMod
-from Lilu import liluMod
-from Brian import brianMod
-from Pmis import pmisMod
-from Hashbrown import hashbrownMod
+from AudioHandler import audioHandler
 
-#register blueprints in the app
-app.register_blueprint(remagMod, url_prefix='/remag')
-app.register_blueprint(earMod, url_prefix='/ear')
-app.register_blueprint(liluMod, url_prefix='/lilu')
-app.register_blueprint(brianMod, url_prefix='/brian')
-app.register_blueprint(pmisMod, url_prefix='/pmis')
-app.register_blueprint(hashbrownMod, url_prefix='/hashbrown')
+
+#register blueprints in the app. URL_prefix is the path that is used in the url so in this case: localhost:5000/Audio
+app.register_blueprint(audioHandler, url_prefix='/Audio')
+
 
 
 
